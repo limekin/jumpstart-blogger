@@ -1,0 +1,14 @@
+<h2> List of articles : </h2>
+
+<% if @articles.empty? %>
+    <p>Sorry there aren't any articles created.</p>
+<% else %>
+    <% @articles.each do |article| %>
+	<strong>
+	    <%= link_to article.title, article_path(article) %>
+	</strong>
+    <br>
+    <% end %>
+<% end %>
+
+<%= link_to "Create an article", new_article_path %>

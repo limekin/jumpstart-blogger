@@ -1,0 +1,32 @@
+<h2>
+    <%= @article.title %>
+</h2>
+
+<p>
+    <%= @article.body %>
+</p>
+
+<br>
+<p> Tags : 
+<% @article.tags.each do |tag| %>
+	<em> <%= link_to tag.name, tag_path(tag) %> </em> 
+    <% end %>
+</p>
+
+<% unless @article.attachments.empty? %>
+    <h3>Images : </h3>
+    <%= @article.attachments.each do |attachment| %>
+	<%= image_tag attachment.image.url %>
+	<br>
+    <% end %>
+<% end %>
+
+<% unless @article.comments.empty? %>
+    <h3>Comments ( <%= @article.comments.size %> )</h3>
+<% end %>
+<%= render partial: "articles/comment", collection: @article.comments %>
+<%= render partial: "comments/form" %>
+<%= link_to "Edit this article", edit_article_path(@article) %>
+<%= link_to "Delete this article", article_path(@article) , method: :delete%>
+<%= link_to "Articles", articles_path %>
+
